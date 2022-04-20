@@ -8,3 +8,6 @@ El laboratorio 4 trata de usar algoritmos de fuerza bruta y bisección para pode
 El algoritmo de fuerza bruta corre con una complejidad O(n), con n el tamaño del intervalo a buscar
 
 El algoritmo de bisección se ejecuta con una complejidad de O(alogn) debido a la division que se hace la division del espacio de busqueda con cada iteración, con a la cantidad de raices del algoritmo a buscar y con n el tamaño del intervalo a analizar.
+
+20/04/22 12:21 pm 
+Se agrega un colab extra con algoritmos considerados pero no expuestos
