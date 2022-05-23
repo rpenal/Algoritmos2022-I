@@ -1,3 +1,7 @@
+# Laboratorio 5
+
+Este laboratorio consistió en maximizar una función por medio de algoritmos genéticos.
+
 5. Contra funciones lineales o que solo tienen un maximo global, tiende a aglutinarse cerca de este maximo,
 mas algunos valores se alejan, probablemente mutaciones.
 Con funciones oscilantes, generalmente solo se acerca al optimo global. De vez en cuando algunas 
