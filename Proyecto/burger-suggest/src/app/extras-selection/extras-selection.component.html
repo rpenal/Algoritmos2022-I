@@ -1,0 +1,7 @@
+<p>extras-selection works!</p>
+<div *ngFor="let extra of this.EXTRAS">
+  <input type="checkbox" id="{{extra}}" name="{{extra}}" [(ngModel)]="selectedExtras[extra]">
+  <label for="{{extra}}">{{extra}}</label>
+</div> 
+<button (click)="printExtras()">Print extras</button>
+<button (click)="selectExtras()" routerLink="/result">Continue</button>

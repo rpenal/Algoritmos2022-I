@@ -1,0 +1,3 @@
+<p>meat-selection works!</p>
+<button (click)="checkBread()">Check Bread</button>
+<button *ngFor="let meat of this.MEATS" (click)="selectMeat(meat)" routerLink="/extras">{{meat}}</button>
