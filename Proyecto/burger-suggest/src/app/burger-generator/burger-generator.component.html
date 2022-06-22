@@ -1,0 +1,74 @@
+<mat-stepper>
+  <mat-step label="Choose your bread">
+    <div style="overflow: hidden;">
+      <button mat-raised-button color="primary" style="float: right;" matStepperNext>Next</button>
+    </div>
+    <mat-grid-list cols="4">
+      <mat-grid-tile *ngFor="let bread of this.BREADS">
+        <a (click)="selectBread(bread)">
+          <mat-card [ngClass]="this.selectedBread == bread ? 'selected' : ''">
+            <img mat-card-image src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Korb_mit_Br%C3%B6tchen.JPG">
+            <mat-card-content>
+              {{bread}}
+            </mat-card-content>
+          </mat-card>
+        </a>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-step>
+  <mat-step label="Choose your meat">
+    <div style="overflow: hidden;">
+      <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" style="float: right;" matStepperNext>Next</button>
+    </div>
+    <mat-grid-list cols="4">
+      <mat-grid-tile *ngFor="let meat of this.MEATS">
+        <a (click)="selectMeat(meat)">
+          <mat-card [ngClass]="this.selectedMeat == meat ? 'selected' : ''">
+            <img mat-card-image src="https://upload.wikimedia.org/wikipedia/commons/5/52/Hamburger_patty.jpg">
+            <mat-card-content>
+              {{meat}}
+            </mat-card-content>
+          </mat-card>
+        </a>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-step>
+  <mat-step label="Choose your extras">
+    <div style="overflow: hidden;">
+      <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" style="float: right;" matStepperNext>Next</button>
+    </div>
+    <mat-grid-list cols="4">
+      <mat-grid-tile *ngFor="let extra of this.EXTRAS">
+        <a (click)="selectExtra(extra)">
+          <mat-card [ngClass]="this.selectedExtras.includes(extra) ? 'selected' : ''">
+            <img mat-card-image src="https://upload.wikimedia.org/wikipedia/commons/9/96/Maccagno_%28cheese%29.jpg">
+            <mat-card-content>
+              {{extra}}
+            </mat-card-content>
+          </mat-card>
+        </a>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-step>
+  <mat-step label="Check your order">
+    <h1>Confirm your order</h1>
+    <p>Your ingredients:</p>
+    <mat-chip-list>
+      <mat-chip color="primary" selected *ngFor="let ing of this.getIngList()">{{ing}}</mat-chip>
+    </mat-chip-list>
+    <p>How many extra ingredients do you want our algorithm to generate?</p>
+    <form class="burger-params-form">
+      <mat-form-field appearance="fill">
+        <mat-label>Amount</mat-label>
+        <input name="amount" type="number" matInput [(ngModel)]="ingAmount">
+      </mat-form-field>
+    </form>
+    <button mat-raised-button color="primary" (click)="setBurger()">Generate burger!</button>
+    <p>Your algorithmic generated burger is...</p>
+    <mat-chip-list *ngIf="burger">
+      <mat-chip color="accent" selected *ngFor="let ing of burger">{{ing}}</mat-chip>
+    </mat-chip-list>
+  </mat-step>
+</mat-stepper>

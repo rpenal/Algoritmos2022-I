@@ -1,2 +1,13 @@
-<p>bread-selection works!</p>
-<button *ngFor="let bread of this.BREADS" (click)="selectBread(bread)" routerLink="/meat">{{bread}}</button>
+<p>Seleccione su tipo de pan</p>
+<mat-grid-list cols="6">
+  <mat-grid-tile *ngFor="let bread of this.BREADS">
+    <a (click)="selectBread(bread)" routerLink="/meat">
+      <mat-card>
+        <mat-card-content>
+          <img mat-card-image src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Korb_mit_Br%C3%B6tchen.JPG">
+        </mat-card-content>
+        <mat-card-footer>{{bread}}</mat-card-footer>
+      </mat-card>
+    </a>
+  </mat-grid-tile>
+</mat-grid-list>
