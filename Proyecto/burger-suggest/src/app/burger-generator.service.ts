@@ -11,6 +11,7 @@ export class BurgerGeneratorService {
   readonly FILENAMES: string[] = FILENAMES;
   INGREDIENTS: any = {};
   SIMILARITIES: any = {};
+  PHOTOS: any = {};
 
   BREADS: string[] = BREADS;
   MEATS: string[] = MEATS;
@@ -26,13 +27,13 @@ export class BurgerGeneratorService {
     const obs = this.initIngList();
     obs.subscribe((ingredient: any) => {
       let name = ingredient.entity_alias_readable;
+      this.PHOTOS[name] = ingredient.photo;
       this.INGREDIENTS[name] = [];
       for (const compound of ingredient.molecules) {
         this.INGREDIENTS[name].push(compound.common_name);
       }
       if (Object.keys(this.INGREDIENTS).length == FILENAMES.length) {
         this.initSimList();
-        console.log('burger for ["Lamb", "Onion", "Eggplant"]: ' + this.generateBurger(7, ["Lamb", "Onion", "Eggplant"]));
       }
     });
   }
