@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, EMPTY, merge, Subject, BehaviorSubject} from 'rxjs';
+import {Observable, EMPTY, merge, BehaviorSubject} from 'rxjs';
 
 import {FILENAMES, BREADS, MEATS} from './burger-gen';
 

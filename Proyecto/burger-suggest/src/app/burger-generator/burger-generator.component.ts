@@ -14,6 +14,7 @@ export class BurgerGeneratorComponent implements OnInit {
   readonly PHOTOS: any = this.burgen.PHOTOS;
 
   ingAmount: number = 0;
+  dissonant: boolean = false;
   burger: string[] = [];
 
   selectedBread: string = '';
@@ -42,8 +43,13 @@ export class BurgerGeneratorComponent implements OnInit {
         (x: string) => x != extra
       );
     } else {
+      if (!extra) {
+        this.selectedExtras.length = 0;
+        return;
+      }
       this.selectedExtras.push(extra);
     }
+    console.log(this.selectedExtras.length);
   }
 
   getIngList(): string[] {
@@ -55,8 +61,11 @@ export class BurgerGeneratorComponent implements OnInit {
 
   setBurger(): void {
     let ingList: string[] = this.getIngList();
+    let hasBread: number = this.selectedBread ? 0 : 1;
+    let hasMeat: number = this.selectedMeat ? 0 : 1;
+    let offset = hasBread + hasMeat;
     this.burger = this.burgen.generateBurger(
-      ingList.length + this.ingAmount,
+      ingList.length + this.ingAmount + offset,
       ingList
     );
   }

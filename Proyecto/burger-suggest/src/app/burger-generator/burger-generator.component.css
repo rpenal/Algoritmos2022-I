@@ -3,6 +3,11 @@
   width: 300px;
 }
 
+mat-card {
+  height: fit-content;
+  width: fit-content;
+}
+
 .ing-display {
   margin: 2rem;
   display: grid;
