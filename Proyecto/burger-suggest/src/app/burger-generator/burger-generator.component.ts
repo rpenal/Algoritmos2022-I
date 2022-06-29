@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from 'rxjs';
 import { BurgerGeneratorService } from '../burger-generator.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { BurgerGeneratorService } from '../burger-generator.service';
 export class BurgerGeneratorComponent implements OnInit {
   readonly BREADS: string[] = this.burgen.BREADS;
   readonly MEATS: string[] = this.burgen.MEATS;
-  readonly EXTRAS: string[] = this.burgen.EXTRAS;
+  readonly EXTRAS: Observable<string[]> = this.burgen.EXTRAS;
   readonly PHOTOS: any = this.burgen.PHOTOS;
 
   ingAmount: number = 0;
@@ -22,7 +23,7 @@ export class BurgerGeneratorComponent implements OnInit {
   constructor(private burgen: BurgerGeneratorService) {
     console.log(this.BREADS);
     console.log(this.MEATS);
-    console.log(this.EXTRAS);
+    this.EXTRAS.subscribe(e => console.log(e));
   }
 
   ngOnInit(): void {}

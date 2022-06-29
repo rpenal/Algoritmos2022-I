@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, EMPTY, merge} from 'rxjs';
+import {Observable, EMPTY, merge, Subject, BehaviorSubject} from 'rxjs';
 
 import {FILENAMES, BREADS, MEATS} from './burger-gen';
 
@@ -15,7 +15,7 @@ export class BurgerGeneratorService {
 
   BREADS: string[] = BREADS;
   MEATS: string[] = MEATS;
-  EXTRAS: string[] = [];
+  EXTRAS: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
   readonly DATADIR: string = 'assets/data/';
 
@@ -51,7 +51,8 @@ export class BurgerGeneratorService {
   }
 
   initSimList(): void {
-    this.EXTRAS = Object.keys(this.INGREDIENTS).filter((ing: string) => !(this.BREADS.includes(ing) || this.MEATS.includes(ing)));
+    let extras = Object.keys(this.INGREDIENTS).filter((ing: string) => !(this.BREADS.includes(ing) || this.MEATS.includes(ing)));
+    this.EXTRAS.next(extras);
     for (const bread of this.BREADS) {
       this.SIMILARITIES[bread] = {};
       for (const meat of this.MEATS) {
@@ -62,15 +63,15 @@ export class BurgerGeneratorService {
     }
     for (const meat of this.MEATS) {
       this.SIMILARITIES[meat] = {};
-      for (const ext of this.EXTRAS) {
+      for (const ext of extras) {
         let intersect: string[] = this.intersection(this.INGREDIENTS[meat], this.INGREDIENTS[ext])
         let simil: number = intersect.length / Math.max(this.INGREDIENTS[meat].length, this.INGREDIENTS[ext].length);
         this.SIMILARITIES[meat][ext] = simil;
       }
     }
-    for (const princ of this.EXTRAS) {
+    for (const princ of extras) {
       this.SIMILARITIES[princ] = {};
-      for (const pair of this.EXTRAS.concat(this.MEATS.concat(this.BREADS))) {
+      for (const pair of extras.concat(this.MEATS.concat(this.BREADS))) {
         if (princ != pair) {
           if (Object.keys(this.SIMILARITIES).includes(pair)) {
             if (Object.keys(this.SIMILARITIES[pair]).includes(princ)) {

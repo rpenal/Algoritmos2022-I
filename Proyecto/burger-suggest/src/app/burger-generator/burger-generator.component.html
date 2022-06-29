@@ -57,7 +57,7 @@
       </button>
     </div>
     <div class="ing-display">
-      <a (click)="selectExtra(extra)" *ngFor="let extra of this.EXTRAS">
+      <a (click)="selectExtra(extra)" *ngFor="let extra of this.EXTRAS | async">
         <mat-card
           [ngClass]="this.selectedExtras.includes(extra) ? 'selected' : ''"
         >

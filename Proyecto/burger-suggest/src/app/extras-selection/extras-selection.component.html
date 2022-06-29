@@ -1,5 +1,5 @@
 <p>extras-selection works!</p>
-<div *ngFor="let extra of this.EXTRAS">
+<div *ngFor="let extra of this.EXTRAS | async">
   <input type="checkbox" id="{{extra}}" name="{{extra}}" [(ngModel)]="selectedExtras[extra]">
   <label for="{{extra}}">{{extra}}</label>
 </div> 
